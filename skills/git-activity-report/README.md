@@ -28,13 +28,13 @@ No third-party Python packages are required.
 
 ## Install This Skill
 
-Install this skill with the `skills` CLI:
+Recommended repository install:
 
 ```bash
-npx skills add https://github.com/chunge16/chunge-skills --skill git-activity-report
+npx skills add chunge16/chunge-skills
 ```
 
-GitHub shorthand also works:
+Install only `git-activity-report` with the `skills` CLI:
 
 ```bash
 npx skills add chunge16/chunge-skills --skill git-activity-report
@@ -146,6 +146,64 @@ Generate JSON output for downstream processing:
 python3 skills/git-activity-report/scripts/generate_report.py \
   --period month \
   --format json
+```
+
+## Option Examples
+
+Use `--root` to aggregate multiple repositories under one projects directory:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period week \
+  --root /Users/shi/Desktop/asiainfo/project
+```
+
+Use `--repo` to target one repository only:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period month \
+  --repo /Users/shi/Desktop/asiainfo/project/ymukj-buss-backend
+```
+
+Use `--author` to filter one contributor:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period week \
+  --author "chunge"
+```
+
+Use `--since` and `--until` for a custom reporting window:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --since 2026-04-01 \
+  --until 2026-04-01T18:00:00
+```
+
+Use `--format json` for downstream processing:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period month \
+  --format json
+```
+
+Use `--cutoff-hour` to override the default daily cutoff:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period day \
+  --cutoff-hour 20
+```
+
+Use `--max-commits` to limit the final output size:
+
+```bash
+python3 skills/git-activity-report/scripts/generate_report.py \
+  --period week \
+  --max-commits 50
 ```
 
 More examples are available in [references/periods.md](./references/periods.md).

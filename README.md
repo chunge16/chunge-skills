@@ -1,28 +1,29 @@
 # Agent Skills Collection
 
+[中文说明](./README.zh.md)
+
 Skills shared for improving day-to-day engineering workflows with Codex and compatible Agent Skills runtimes.
 
 This repository is organized as a skill collection. Each skill lives under `skills/<skill-name>/` and can include `SKILL.md`, `README.md`, helper scripts, references, assets, and optional UI metadata in `agents/openai.yaml`.
 
 ## Prerequisites
 
-- Codex or a compatible Agent Skills runtime
-- Python 3.9+ for Python-based helper scripts
-- `git` on the command line for git-based skills
+- Node.js installed
+- Able to run `npx bun`
 
 ## Installation
 
 Install skills from this repository with the `skills` CLI.
 
-### Quick Install
+### Quick Install (Recommended)
 
-Install the `git-activity-report` skill from this repository:
+Install this repository:
 
 ```bash
-npx skills add https://github.com/chunge16/chunge-skills --skill git-activity-report
+npx skills add chunge16/chunge-skills
 ```
 
-GitHub shorthand also works:
+Install a specific skill from this repository:
 
 ```bash
 npx skills add chunge16/chunge-skills --skill git-activity-report
@@ -78,17 +79,16 @@ Typical use cases:
 - Multi-repo development activity rollups
 - Author-filtered contribution summaries
 
-Quick examples:
+Quick usage examples:
 
-```bash
-# Daily report
-python3 skills/git-activity-report/scripts/generate_report.py
-
-# Weekly report across a projects root
-python3 skills/git-activity-report/scripts/generate_report.py --period week --root /path/to/projects
-
-# Monthly report for one repository
-python3 skills/git-activity-report/scripts/generate_report.py --period month --repo /path/to/repo
+```text
+Use $git-activity-report to generate today's daily report
+Use $git-activity-report to generate this week's weekly report
+Use $git-activity-report to summarize all repos under /path/to/projects
+Use $git-activity-report to generate a monthly report for /path/to/repo
+Use $git-activity-report to generate a weekly report with --author "alice"
+Use $git-activity-report to generate yesterday's report with --since 2026-04-01 --until 2026-04-01T18:00:00
+Use $git-activity-report to export a monthly report as JSON with --format json
 ```
 
 Docs:
