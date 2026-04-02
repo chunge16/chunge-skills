@@ -18,6 +18,8 @@ from typing import Iterable
 LOCAL_TZ = datetime.now().astimezone().tzinfo
 DEFAULT_CUTOFF_HOUR = 18
 DEFAULT_MAX_COMMITS = 200
+PROJECT_ENV_FILE = Path.cwd() / ".chunge-skills" / ".env"
+USER_ENV_FILE = Path.home() / ".chunge-skills" / ".env"
 IGNORED_DIR_NAMES = {
     ".git",
     "node_modules",
@@ -41,17 +43,43 @@ class Commit:
 
 
 def env_default_root() -> str:
-    return os.environ.get("GIT_ACTIVITY_REPORT_ROOT", ".")
+    return env_value("GIT_ACTIVITY_REPORT_ROOT") or "."
 
 
 def env_default_cutoff_hour() -> int:
-    value = os.environ.get("GIT_ACTIVITY_REPORT_CUTOFF_HOUR")
+    value = env_value("GIT_ACTIVITY_REPORT_CUTOFF_HOUR")
     return int(value) if value else DEFAULT_CUTOFF_HOUR
 
 
 def env_default_max_commits() -> int:
-    value = os.environ.get("GIT_ACTIVITY_REPORT_MAX_COMMITS")
+    value = env_value("GIT_ACTIVITY_REPORT_MAX_COMMITS")
     return int(value) if value else DEFAULT_MAX_COMMITS
+
+
+def load_env_file(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+
+    values: dict[str, str] = {}
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip("\"'")
+    return values
+
+
+USER_ENV = load_env_file(USER_ENV_FILE)
+PROJECT_ENV = load_env_file(PROJECT_ENV_FILE)
+
+
+def env_value(name: str) -> str | None:
+    return (
+        os.environ.get(name)
+        or PROJECT_ENV.get(name)
+        or USER_ENV.get(name)
+    )
 
 
 def parse_args() -> argparse.Namespace:

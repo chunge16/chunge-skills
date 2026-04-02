@@ -12,7 +12,7 @@ Generate a structured report from git commits in one repository or across multip
 1. Determine the reporting scope.
 Use `--repo` when the user clearly wants one repository.
 Use `--root` when the user wants all repositories under a projects directory.
-If neither is provided, the script resolves the root from environment variables or defaults to the current working directory.
+If neither is provided, the script resolves configuration in this order: process environment, `<cwd>/.chunge-skills/.env`, `~/.chunge-skills/.env`, then the current working directory.
 
 2. Determine the reporting period.
 Default to `day`.
@@ -46,7 +46,9 @@ Do not invent work not supported by the commit history.
 - `GIT_ACTIVITY_REPORT_CUTOFF_HOUR`
 - `GIT_ACTIVITY_REPORT_MAX_COMMITS`
 
-CLI arguments take priority over environment variables.
+The script also reads `<cwd>/.chunge-skills/.env` and `~/.chunge-skills/.env` for the same keys.
+If no configured root is found, the default root is the current working directory.
+Priority is: CLI args > process environment > project `.env` > user `.env`.
 
 ## Output Rules
 
