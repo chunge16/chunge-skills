@@ -35,10 +35,10 @@ Do not invent work not supported by the commit history.
 - `--repo PATH`: Target a single repository.
 - `--author TEXT`: Filter by author name or email substring.
 - `--since ISO_DATETIME`: Override the start time.
-- `--until ISO_DATETIME`: Override the end time.
+- `--until ISO_DATETIME`: Override the end time. If omitted, the script uses the execution time.
 - `--format markdown|json`: Output format. Default is `markdown`.
 - `--max-commits N`: Limit the final commit list.
-- `--cutoff-hour N`: Default cutoff hour when `--until` is omitted. Default is `18`.
+- `--cutoff-hour N`: Legacy compatibility option. It is currently ignored when `--until` is omitted.
 
 ## Environment Variables
 

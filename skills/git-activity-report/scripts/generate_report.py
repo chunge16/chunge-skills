@@ -160,8 +160,7 @@ def resolve_range(
     cutoff_hour: int,
 ) -> tuple[datetime, datetime]:
     now = datetime.now(LOCAL_TZ)
-    cutoff_today = now.replace(hour=cutoff_hour, minute=0, second=0, microsecond=0)
-    end = parse_datetime(until) if until else min(now, cutoff_today)
+    end = parse_datetime(until) if until else now
 
     if since:
         return parse_datetime(since), end
