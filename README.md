@@ -1,17 +1,54 @@
-# git-activity-report-skill
+# Agent Skills Collection
 
-A shareable Agent Skill repository for generating daily, weekly, and monthly reports from git commit history.
+Skills shared for improving day-to-day engineering workflows with Codex and compatible Agent Skills runtimes.
 
-This repository is organized to match the Agent Skills layout used by Codex and the wider `skills` ecosystem: each skill lives in its own folder under `skills/`.
+This repository is organized as a skill collection. Each skill lives under `skills/<skill-name>/` and can include `SKILL.md`, `README.md`, helper scripts, references, assets, and optional UI metadata in `agents/openai.yaml`.
 
-## Repository Layout
+## Prerequisites
+
+- Codex or a compatible Agent Skills runtime
+- Python 3.9+ for Python-based helper scripts
+- `git` on the command line for git-based skills
+
+## Installation
+
+Install skills from this repository with the `skills` CLI.
+
+### Quick Install
+
+Install the `git-activity-report` skill from this repository:
+
+```bash
+npx skills add https://github.com/chunge16/chunge-skills --skill git-activity-report
+```
+
+GitHub shorthand also works:
+
+```bash
+npx skills add chunge16/chunge-skills --skill git-activity-report
+```
+
+List the skills available in this repository before installing:
+
+```bash
+npx skills add chunge16/chunge-skills --list
+```
+
+Install globally instead of project-local:
+
+```bash
+npx skills add chunge16/chunge-skills --skill git-activity-report --global
+```
+
+### Repository Layout
 
 ```text
-git-activity-report-skill/
+chunge-skills/
 ├── README.md
 ├── LICENSE
 └── skills/
     └── git-activity-report/
+        ├── README.md
         ├── SKILL.md
         ├── LICENSE.txt
         ├── agents/
@@ -22,69 +59,62 @@ git-activity-report-skill/
             └── periods.md
 ```
 
-## What This Skill Does
+## Available Skills
 
-The `git-activity-report` skill generates:
+Skills in this repository are organized by practical workflow category.
 
-- Daily reports
-- Weekly reports
-- Monthly reports
+### Reporting Skills
 
-It supports:
+Skills for turning repository activity into structured engineering updates.
 
-- Single repository mode with `--repo`
-- Multi-repository aggregation with `--root`
-- Configurable cutoff hour
-- Markdown or JSON output
-- Optional author filtering
+#### `git-activity-report`
 
-## Default Resolution Rules
+Generate daily, weekly, and monthly reports from git commit history across one repository or many repositories under a projects root.
 
-The script resolves settings in this order:
+Typical use cases:
 
-1. Explicit CLI flags
-2. Environment variables
-3. Built-in defaults
+- Daily engineering status reports
+- Weekly and monthly summaries
+- Multi-repo development activity rollups
+- Author-filtered contribution summaries
 
-Supported environment variables:
-
-- `GIT_ACTIVITY_REPORT_ROOT`
-- `GIT_ACTIVITY_REPORT_CUTOFF_HOUR`
-- `GIT_ACTIVITY_REPORT_MAX_COMMITS`
-
-## Quick Start
-
-Generate a daily report from the current directory tree:
+Quick examples:
 
 ```bash
+# Daily report
 python3 skills/git-activity-report/scripts/generate_report.py
+
+# Weekly report across a projects root
+python3 skills/git-activity-report/scripts/generate_report.py --period week --root /path/to/projects
+
+# Monthly report for one repository
+python3 skills/git-activity-report/scripts/generate_report.py --period month --repo /path/to/repo
 ```
 
-Generate a weekly report across a projects root:
+Docs:
 
-```bash
-python3 skills/git-activity-report/scripts/generate_report.py \
-  --period week \
-  --root /path/to/projects
-```
+- [git-activity-report README](./skills/git-activity-report/README.md)
+- [git-activity-report SKILL.md](./skills/git-activity-report/SKILL.md)
 
-Generate a monthly report for a single repository:
+## Notes
 
-```bash
-python3 skills/git-activity-report/scripts/generate_report.py \
-  --period month \
-  --repo /path/to/repo
-```
+- Skill-specific installation, usage examples, configuration, and output samples belong in each skill's own `README.md`.
+- `SKILL.md` remains optimized for Codex triggering and runtime guidance rather than for GitHub readers.
 
-## Example Skill Invocation
+## Contributing
 
-- `Use $git-activity-report to generate today's daily report`
-- `Use $git-activity-report to generate this week's weekly report`
-- `Use $git-activity-report to summarize all repos under /path/to/projects`
-- `Use $git-activity-report to generate yesterday's report for one repo`
+When adding a new skill:
+
+1. Create a new directory under `skills/`
+2. Add a `SKILL.md`
+3. Add a `README.md` for user-facing documentation
+4. Add `agents/openai.yaml` when UI metadata is useful
+5. Add `scripts/`, `references/`, or `assets/` only when needed
+6. Add a `LICENSE.txt` inside the skill directory
+7. Add the skill to the `Available Skills` section in this README
 
 ## License
 
 The repository license is in [LICENSE](./LICENSE).
 
-The skill-specific license is in [skills/git-activity-report/LICENSE.txt](./skills/git-activity-report/LICENSE.txt).
+Each skill may also include its own license file, such as [skills/git-activity-report/LICENSE.txt](./skills/git-activity-report/LICENSE.txt).
