@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Activity Report"
+  short_description: "Generate daily, weekly, or monthly git reports"
+  default_prompt: "Use $git-activity-report to generate a git activity report from recent commits."
