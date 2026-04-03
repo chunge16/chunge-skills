@@ -7,12 +7,19 @@ description: Generate a daily, weekly, or monthly work report from git commit hi
 
 Generate a structured report from git commits in one repository or across multiple repositories under a root directory.
 
+## Key Terms
+
+- Current working directory (`cwd`): the directory where you run the command. It is only used to locate `<cwd>/.chunge-skills/.env`, and as the fallback scan root when no other root is configured.
+- Report scan root: the directory whose child repositories will be scanned. This is controlled by `--root`, `GIT_ACTIVITY_REPORT_ROOT`, or the fallback rules below. It is not automatically the skill repository directory.
+- Single repository target: when `--repo` is provided, the script scans only that repository and does not use the scan root.
+
 ## Workflow
 
 1. Determine the reporting scope.
 Use `--repo` when the user clearly wants one repository.
 Use `--root` when the user wants all repositories under a projects directory.
-If neither is provided, the script resolves configuration in this order: process environment, `<cwd>/.chunge-skills/.env`, `~/.chunge-skills/.env`, then the current working directory.
+If neither is provided, the script resolves the report scan root in this order: process environment, `<cwd>/.chunge-skills/.env`, `~/.chunge-skills/.env`, then the current working directory.
+This priority controls where the script scans for git repositories. It does not change which skill files are loaded.
 
 2. Determine the reporting period.
 Default to `day`.
@@ -47,8 +54,21 @@ Do not invent work not supported by the commit history.
 - `GIT_ACTIVITY_REPORT_MAX_COMMITS`
 
 The script also reads `<cwd>/.chunge-skills/.env` and `~/.chunge-skills/.env` for the same keys.
-If no configured root is found, the default root is the current working directory.
+`GIT_ACTIVITY_REPORT_ROOT` sets the report scan root, not the current project in Codex.
+If no configured root is found, the report scan root falls back to the current working directory.
 Priority is: CLI args > process environment > project `.env` > user `.env`.
+
+Example:
+
+- You run the script from `/work/chunge-skills`
+- `~/.chunge-skills/.env` contains `GIT_ACTIVITY_REPORT_ROOT=/work/projects`
+- No `--root` is passed
+
+Result:
+
+- The script is executed from `/work/chunge-skills`
+- The project `.env` lookup path is `/work/chunge-skills/.chunge-skills/.env`
+- The repositories are scanned under `/work/projects`
 
 ## Output Rules
 

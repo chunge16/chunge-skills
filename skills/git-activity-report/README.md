@@ -60,19 +60,36 @@ From the repository root:
 python3 skills/git-activity-report/scripts/generate_report.py
 ```
 
+## Terminology
+
+- Current working directory (`cwd`): the directory where you launch the command.
+- Project `.env`: the file at `<cwd>/.chunge-skills/.env`.
+- Report scan root: the directory whose child git repositories will be scanned.
+- Single repository target: the repository passed via `--repo`.
+
+These are different concepts:
+
+- Running the script from the skill repository does not mean the skill repository will be scanned.
+- `GIT_ACTIVITY_REPORT_ROOT` changes the report scan root only.
+- `--repo` bypasses root scanning and targets one repository directly.
+
 ## Configuration
 
-The script resolves settings in this order:
+The script resolves the report scan root in this order:
 
 1. Explicit CLI flags
-2. Environment variables
-3. Built-in defaults
+2. Process environment variables
+3. `<cwd>/.chunge-skills/.env`
+4. `~/.chunge-skills/.env`
+5. Built-in fallback to the current working directory
 
 Supported environment variables:
 
 - `GIT_ACTIVITY_REPORT_ROOT`
 - `GIT_ACTIVITY_REPORT_CUTOFF_HOUR`
 - `GIT_ACTIVITY_REPORT_MAX_COMMITS`
+
+`GIT_ACTIVITY_REPORT_ROOT` controls the report scan root. It does not change the current working directory and does not point Codex at a different project automatically.
 
 Example:
 
@@ -99,6 +116,26 @@ Common options:
 - `--format markdown|json`
 - `--max-commits 200`
 - `--cutoff-hour 18`
+
+## How Scope Is Decided
+
+1. If you pass `--repo`, only that repository is scanned.
+2. Otherwise, if you pass `--root`, that directory becomes the report scan root.
+3. Otherwise, the script looks for `GIT_ACTIVITY_REPORT_ROOT` in:
+   `process environment -> <cwd>/.chunge-skills/.env -> ~/.chunge-skills/.env`
+4. If nothing is configured, the report scan root falls back to the current working directory.
+
+Practical example:
+
+- Command is run from `/Users/shi/Desktop/project/new-xhs/chunge-skills`
+- `~/.chunge-skills/.env` contains `GIT_ACTIVITY_REPORT_ROOT=/Users/shi/Desktop/asiainfo/project`
+- No `--root` or `--repo` is passed
+
+Result:
+
+- The script reads project-local config from `/Users/shi/Desktop/project/new-xhs/chunge-skills/.chunge-skills/.env` if it exists
+- The actual repositories are scanned under `/Users/shi/Desktop/asiainfo/project`
+- The skill repository itself is not scanned unless it is selected by `--repo`, `--root`, or fallback rules
 
 ## Usage Examples
 
@@ -243,4 +280,5 @@ More examples are available in [references/periods.md](./references/periods.md).
 
 - When `--until` is omitted, the script uses the current day at the configured cutoff hour, or `now` if it is earlier.
 - When `--repo` is provided, root scanning is skipped.
+- `<cwd>` affects where project-local `.env` is searched, but does not by itself decide the scan root if a higher-priority root is configured.
 - When scanning many repositories, unreadable or broken repositories are reported as warnings instead of aborting the entire run.
