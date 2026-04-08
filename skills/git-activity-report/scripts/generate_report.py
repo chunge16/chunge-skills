@@ -218,7 +218,8 @@ def load_commits(
     author: str | None,
     max_commits: int,
 ) -> list[Commit]:
-    git_format = "%H%x1f%an%x1f%ae%x1f%ad%x1f%s"
+    # Use commit date so our in-Python filtering matches `git log --since/--until`.
+    git_format = "%H%x1f%an%x1f%ae%x1f%cI%x1f%s"
     cmd = [
         "git",
         "-C",
