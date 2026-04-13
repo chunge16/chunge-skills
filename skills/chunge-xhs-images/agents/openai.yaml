@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chunge XHS Images"
+  short_description: "Generate Xiaohongshu image carousels directly in Codex without local image SDK keys"
+  default_prompt: "Use $chunge-xhs-images to turn this article or note into a Xiaohongshu image series directly in Codex without local image SDK keys."

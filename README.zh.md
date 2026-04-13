@@ -104,6 +104,35 @@ chunge-skills/
 - [git-activity-report README](./skills/git-activity-report/README.md)
 - [git-activity-report SKILL.md](./skills/git-activity-report/SKILL.md)
 
+### 社交内容图片类
+
+用于把文章、笔记和提纲转成可发布社交媒体图片内容的 skill。
+
+#### `chunge-xhs-images`
+
+把文章、笔记或提纲直接转成小红书 / RedNote 图文图片组，运行时由 Codex 直接完成出图，不要求用户单独配置本地 AI 图像 SDK 密钥。
+
+典型场景：
+
+- 把一篇文章拆成 5-7 页小红书图文
+- 生成封面图 + 多张内容页
+- 制作 AI、SaaS、学习笔记、教程类知识卡
+- 生成对比卡、清单卡和信息图风格轮播图
+
+快速使用示例：
+
+```text
+使用 $chunge-xhs-images 把这篇文章转成 6 页小红书图文
+使用 $chunge-xhs-images 为这份笔记生成 1 张封面和 5 张内容图
+使用 $chunge-xhs-images 以 notion 风格的高密度知识卡来制作
+使用 $chunge-xhs-images 直接在 Codex 中生成 RedNote 信息图图片
+```
+
+相关文档：
+
+- [chunge-xhs-images README](./skills/chunge-xhs-images/README.md)
+- [chunge-xhs-images SKILL.md](./skills/chunge-xhs-images/SKILL.md)
+
 ## 说明
 
 - 每个 skill 的安装、配置、示例和输出样例，建议维护在该 skill 自己的 `README.md` 中。

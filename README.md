@@ -96,6 +96,35 @@ Docs:
 - [git-activity-report README](./skills/git-activity-report/README.md)
 - [git-activity-report SKILL.md](./skills/git-activity-report/SKILL.md)
 
+### Social Content Skills
+
+Skills for turning source material into publishable social-media visuals.
+
+#### `chunge-xhs-images`
+
+Generate Xiaohongshu and RedNote image carousels directly in Codex from articles, notes, and outlines, without requiring a separately configured local image SDK key.
+
+Typical use cases:
+
+- Turn an article into a 5-7 page Xiaohongshu carousel
+- Generate a cover plus content images for a RedNote post
+- Produce knowledge-card style AI, SaaS, study, or tutorial visuals
+- Create comparison cards, checklist cards, and infographic-style social slides
+
+Quick usage examples:
+
+```text
+Use $chunge-xhs-images to turn this article into a 6-page Xiaohongshu carousel
+Use $chunge-xhs-images to create a cover and 5 content pages for this note
+Use $chunge-xhs-images with a notion dense knowledge-card style
+Use $chunge-xhs-images to generate RedNote infographic images directly in Codex
+```
+
+Docs:
+
+- [chunge-xhs-images README](./skills/chunge-xhs-images/README.md)
+- [chunge-xhs-images SKILL.md](./skills/chunge-xhs-images/SKILL.md)
+
 ## Notes
 
 - Skill-specific installation, usage examples, configuration, and output samples belong in each skill's own `README.md`.
