@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chunge XHS Post"
+  short_description: "一键协调小红书图片与文案生成的整套发布工作流"
+  default_prompt: "Use $chunge-xhs-post to create a coordinated Xiaohongshu image-and-copy post package."

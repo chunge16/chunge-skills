@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chunge XHS Content"
+  short_description: "生成适合小红书发布的简洁有力标题、正文和话题组合"
+  default_prompt: "Use $chunge-xhs-content to write a concise Xiaohongshu title, body, and hashtags with icons."
