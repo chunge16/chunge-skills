@@ -1,6 +1,6 @@
 ---
 name: chunge-xhs-post
-description: Orchestrate a full Xiaohongshu post package by coordinating image generation and caption writing. Use when the user wants 一整套小红书图文, 小红书配图+文案, image cards plus 标题正文话题, RedNote post package, or asks to use baoyu-image-cards together with chunge-xhs-content to produce coordinated publish-ready content.
+description: Orchestrate a full Xiaohongshu post package by coordinating image generation and caption writing. Use when the user wants 一整套小红书图文, 小红书配图+文案, image cards plus 标题正文话题, RedNote post package, or asks to use baoyu-image-cards together with chunge-xhs-content to produce coordinated publish-ready content. Default to full-package unless the user explicitly asks for text only or image only.
 ---
 
 # Chunge XHS Post
@@ -8,6 +8,8 @@ description: Orchestrate a full Xiaohongshu post package by coordinating image g
 Build a coordinated Xiaohongshu post package in one workflow. This skill is the top-level orchestrator for `baoyu-image-cards` and `chunge-xhs-content`.
 
 Use this skill when the user wants the whole package, not just one asset.
+
+Assume the user wants both images and copy unless they clearly restrict the output.
 
 ## Companion Skills
 
@@ -49,7 +51,9 @@ Choose one path quickly:
 - `text-only`: user explicitly wants only title, body, and hashtags
 - `image-only`: user explicitly wants only visuals or image direction
 
-Default to `full-package` when the user asks for a 小红书图文 or similar bundled deliverable.
+Default to `full-package` when the user asks for a 小红书图文, 小红书内容, 小红书帖子, RedNote post, or similar bundled deliverable.
+
+If the request is ambiguous, prefer `full-package`, not `text-only`.
 
 ## Main Workflow
 
@@ -63,6 +67,13 @@ Before doing anything else, reduce the request to:
 - one dominant angle
 
 If the user gives many points, compress them. The final package should feel unified.
+
+Before moving on, ask yourself:
+
+- did the user explicitly ban images?
+- did the user explicitly ban copy?
+
+If not, stay on `full-package`.
 
 ### 2. Decide the visual strategy
 
@@ -124,6 +135,7 @@ For partial paths:
 - When the user asks for direct posting format, output only the usable deliverables.
 - When the user explicitly says not to generate images, do not include image direction unless they ask for it.
 - When the user explicitly says text only, route directly to caption delivery.
+- When the user does not explicitly say text-only or image-only, do not silently downgrade to text-only.
 
 ## References
 
