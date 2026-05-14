@@ -98,7 +98,32 @@ Docs:
 
 ### Social Content Skills
 
-Skills for turning source material into publishable social-media visuals.
+Skills for turning source material into publishable social-media content.
+
+#### `xhs-copywriter`
+
+Generate concise, copy-ready Xiaohongshu post text from images, image cards, notes, article excerpts, product context, and finance-related source material.
+
+Typical use cases:
+
+- Turn image cards into matching Xiaohongshu copy
+- Write title + body + hashtags from notes or source text
+- Produce finance-note style posts that preserve dates and numbers
+- Create compact product-share copy with caveats and target audience
+
+Quick usage examples:
+
+```text
+Use $xhs-copywriter to turn this image card set into copyable Xiaohongshu text
+Use $xhs-copywriter to write title, body, and hashtags for this note in text format
+Use $xhs-copywriter in finance-note mode for this ETF summary
+Use $xhs-copywriter to generate a short Xiaohongshu caption for this product share
+```
+
+Docs:
+
+- [xhs-copywriter README](./skills/xhs-copywriter/README.md)
+- [xhs-copywriter SKILL.md](./skills/xhs-copywriter/SKILL.md)
 
 #### `chunge-xhs-images`
 

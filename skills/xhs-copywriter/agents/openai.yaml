@@ -1,0 +1,4 @@
+interface:
+  display_name: "XHS Copywriter"
+  short_description: "生成可直接复制的小红书文案与话题"
+  default_prompt: "Use $xhs-copywriter to turn this image or context into concise copy-ready Xiaohongshu text."

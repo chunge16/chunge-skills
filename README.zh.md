@@ -104,9 +104,34 @@ chunge-skills/
 - [git-activity-report README](./skills/git-activity-report/README.md)
 - [git-activity-report SKILL.md](./skills/git-activity-report/SKILL.md)
 
-### 社交内容图片类
+### 社交内容类
 
-用于把文章、笔记和提纲转成可发布社交媒体图片内容的 skill。
+用于把文章、笔记和提纲转成可发布社交媒体内容的 skill。
+
+#### `xhs-copywriter`
+
+把图片、图文卡片、笔记、文章片段、产品信息或金融类素材，整理成可直接复制的小红书标题、正文和话题。
+
+典型场景：
+
+- 给现成图文卡片补一段可发布文案
+- 把笔记或素材整理成标题 + 正文 + 话题
+- 生成保留日期和数字的金融学习记录文案
+- 生成带适用人群和注意点的产品分享文案
+
+快速使用示例：
+
+```text
+使用 $xhs-copywriter 把这组图文卡片整理成可复制的小红书文案
+使用 $xhs-copywriter 把这份笔记写成 text 格式的小红书标题、正文和话题
+使用 $xhs-copywriter 的 finance-note 模式处理这份 ETF 摘要
+使用 $xhs-copywriter 为这个产品分享生成一版简洁小红书文案
+```
+
+相关文档：
+
+- [xhs-copywriter README](./skills/xhs-copywriter/README.md)
+- [xhs-copywriter SKILL.md](./skills/xhs-copywriter/SKILL.md)
 
 #### `chunge-xhs-images`
 
